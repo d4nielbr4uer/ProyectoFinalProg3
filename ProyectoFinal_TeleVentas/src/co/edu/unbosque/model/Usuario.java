@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Persistence;
 import javax.persistence.Table;
+import org.apache.commons.codec.digest.DigestUtils;
 
 @Entity
 @Table(name="usuario")
@@ -85,6 +86,28 @@ public class Usuario {
 		
 	//--------------------------Métodos---------------------------//
 		
+	
+	/**
+	 * Este metodo encripta la contraseña por el metodo MD5
+	 * @return retorna la contraseña encriptada
+	 */
+	public String encriptarMD5(){
+		
+		String contraEncrip = DigestUtils.md5Hex(contraseña);
+		return contraEncrip;
+	}
+	
+	/**
+	 * Este metodo encripta la contraseña por el metodo SHA1
+	 * @return retorna la contraseña encriptada
+	 */
+	public String encriptarSHA1(){
+		
+		String contraEncrip = DigestUtils.sha1Hex(contraseña);
+		return contraEncrip;
+	}
+	
+	
 	public String registro() {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ProyectoFinal_TeleVentas");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
